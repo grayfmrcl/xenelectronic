@@ -122,7 +122,7 @@ describe('Product controller', () => {
         .once()
         .resolves(product);
 
-      const result = await productController.getById(product.id);
+      const result = await productController.getById({ params: { id: product.id } });
       assert.deepStrictEqual(result, product);
     });
   });

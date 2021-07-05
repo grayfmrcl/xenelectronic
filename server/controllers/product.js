@@ -28,8 +28,8 @@ const getList = async () => {
   return result;
 };
 
-const getById = async (id) => {
-  const result = await Product.findByPk(id, {
+const getById = async (payload) => {
+  const result = await Product.findByPk(payload.params.id, {
     include: {
       attributes: ['id', 'name'],
       model: Category,
