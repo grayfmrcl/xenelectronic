@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const indexRouter = require('./routes/index');
+const categoryRouter = require('./routes/categories');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', indexRouter);
+app.use('/categories', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
