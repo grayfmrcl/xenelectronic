@@ -19,6 +19,7 @@ describe('Product controller', () => {
   afterEach(() => {
     sandbox.restore();
   });
+
   describe('Product Create', () => {
     it('Should call Product.create to save product', async () => {
       const uuid = '400fa6cb-25fd-435c-acfb-70fc816277c7';
@@ -51,6 +52,7 @@ describe('Product controller', () => {
       assert.deepStrictEqual(result, mockResult);
     });
   });
+
   describe('Product List', () => {
     it('Should call Product.findAll to get all products', async () => {
       const products = [{
@@ -93,6 +95,35 @@ describe('Product controller', () => {
 
       const result = await productController.getList();
       assert.deepStrictEqual(result, products);
+    });
+  });
+
+  describe('Product Detail', () => {
+    it('Should call Product.findByPk to get single product', async () => {
+      const product = {
+        id: 'a9a17c83-e793-473c-b34d-5257aac7606e',
+        categoryId: '2a0a2b5f-2577-482c-b7a1-420f3f6ab7e4',
+        name: 'PlayStation 5 Disk',
+        price: '8500000.00',
+        imageUrl: null,
+        createdAt: '2021-07-04T00:00:00.000Z',
+        updatedAt: '2021-07-04T00:00:00.000Z',
+      };
+
+      sandbox.mock(productModel)
+        .expects('findByPk')
+        .withArgs(product.id, {
+          include: {
+            attributes: ['id', 'name'],
+            model: categoryModel,
+            as: 'category',
+          },
+        })
+        .once()
+        .resolves(product);
+
+      const result = await productController.getById(product.id);
+      assert.deepStrictEqual(result, product);
     });
   });
 });

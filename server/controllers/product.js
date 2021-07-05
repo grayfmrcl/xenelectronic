@@ -28,7 +28,19 @@ const getList = async () => {
   return result;
 };
 
+const getById = async (id) => {
+  const result = await Product.findByPk(id, {
+    include: {
+      attributes: ['id', 'name'],
+      model: Category,
+      as: 'category',
+    },
+  });
+  return result;
+};
+
 module.exports = {
   create,
   getList,
+  getById,
 };
