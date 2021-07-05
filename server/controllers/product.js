@@ -1,6 +1,9 @@
 const identity = require('../helpers/identity');
 
-const { product: Product } = require('../models');
+const {
+  product: Product,
+  category: Category,
+} = require('../models');
 
 const create = async (payload) => {
   const product = {
@@ -12,7 +15,16 @@ const create = async (payload) => {
 };
 
 const getList = async () => {
-  const result = await Product.findAll();
+  const result = await Product.findAll({
+    include: {
+      attributes: ['id', 'name'],
+      model: Category,
+      as: 'category',
+    },
+    orders: [
+      ['id', 'desc'],
+    ],
+  });
   return result;
 };
 

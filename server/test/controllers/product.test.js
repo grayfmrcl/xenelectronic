@@ -2,7 +2,10 @@
 const assert = require('assert');
 const sinon = require('sinon');
 
-const { product: productModel } = require('../../models');
+const {
+  product: productModel,
+  category: categoryModel,
+} = require('../../models');
 const productController = require('../../controllers/product');
 const identityHelper = require('../../helpers/identity');
 
@@ -53,16 +56,38 @@ describe('Product controller', () => {
       const products = [{
         name: 'Product 1',
         price: 10000,
+        category: {
+          id: 'uuid-cat-001',
+          name: 'Category 1',
+        },
       }, {
         name: 'Product 2',
         price: 0,
+        category: {
+          id: 'uuid-cat-001',
+          name: 'Category 1',
+        },
       }, {
         name: 'Product 3',
         price: 5000,
+        category: {
+          id: 'uuid-cat-002',
+          name: 'Category 2',
+        },
       }];
 
-      sandbox.mock(productController)
-        .expects('getList')
+      sandbox.mock(productModel)
+        .expects('findAll')
+        .withArgs({
+          include: {
+            attributes: ['id', 'name'],
+            model: categoryModel,
+            as: 'category',
+          },
+          orders: [
+            ['id', 'desc'],
+          ],
+        })
         .once()
         .resolves(products);
 
