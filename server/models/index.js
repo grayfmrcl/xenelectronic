@@ -19,6 +19,8 @@ fs
     db[model.name] = model;
   });
 
+db.product.belongsTo(db.category, { as: 'category' });
+
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
