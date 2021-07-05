@@ -16,7 +16,7 @@ describe('Product controller', () => {
   afterEach(() => {
     sandbox.restore();
   });
-  describe('Welcome', () => {
+  describe('Product Create', () => {
     it('Should call Product.create to save product', async () => {
       const uuid = '400fa6cb-25fd-435c-acfb-70fc816277c7';
       const mockPayload = {
@@ -46,6 +46,28 @@ describe('Product controller', () => {
 
       const result = await productController.create({ body: { ...mockPayload } });
       assert.deepStrictEqual(result, mockResult);
+    });
+  });
+  describe('Product List', () => {
+    it('Should call Product.findAll to get all products', async () => {
+      const products = [{
+        name: 'Product 1',
+        price: 10000,
+      }, {
+        name: 'Product 2',
+        price: 0,
+      }, {
+        name: 'Product 3',
+        price: 5000,
+      }];
+
+      sandbox.mock(productController)
+        .expects('getList')
+        .once()
+        .resolves(products);
+
+      const result = await productController.getList();
+      assert.deepStrictEqual(result, products);
     });
   });
 });

@@ -11,6 +11,12 @@ const create = async (payload) => {
   return result;
 };
 
+const getList = async () => {
+  const result = await Product.findAll();
+  return result;
+};
+
 module.exports = {
   create,
+  getList,
 };
