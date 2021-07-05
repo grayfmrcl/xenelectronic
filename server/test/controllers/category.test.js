@@ -32,7 +32,7 @@ describe('Categories controller', () => {
   afterEach(() => {
     sandbox.restore();
   });
-  describe('Welcome', () => {
+  describe('Category List', () => {
     it('Should return response with all categories', async () => {
       sandbox.mock(categoryModel)
         .expects('findAll')
