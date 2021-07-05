@@ -31,8 +31,11 @@ const response = {
 
 describe('Categories route', () => {
   beforeEach(async () => {
-    await Category.truncate();
+    await Category.truncate({ cascade: true });
     await Category.bulkCreate(categories);
+  });
+  afterEach(async () => {
+    await Category.truncate({ cascade: true });
   });
   describe('GET /categories', () => {
     it('Should get list of categories', async () => {
