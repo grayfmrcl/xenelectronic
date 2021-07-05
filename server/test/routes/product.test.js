@@ -47,4 +47,33 @@ describe('Categories route', () => {
       assert.strictEqual(result.body.data.imageUrl, product.imageUrl);
     });
   });
+  describe('GET /products', () => {
+    it('Should get list of products', async () => {
+      const products = [{
+        id: 'a9a17c83-e793-473c-b34d-5257aac7606e',
+        categoryId: category.id,
+        name: 'PlayStation 5 Disk',
+        price: '8500000.00',
+        imageUrl: null,
+        createdAt: date,
+        updatedAt: date,
+      }];
+
+      const response = {
+        statusCode: 200,
+        data: products.map((product) => ({
+          ...product,
+          category: {
+            id: '2a0a2b5f-2577-482c-b7a1-420f3f6ab7e4',
+            name: 'Game Console',
+          },
+        })),
+      };
+
+      await Product.bulkCreate(products);
+      const result = await request(app).get('/products');
+      assert.strictEqual(result.statusCode, 200);
+      assert.deepStrictEqual(result.body, response);
+    });
+  });
 });
