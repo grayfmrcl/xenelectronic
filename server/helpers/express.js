@@ -1,6 +1,5 @@
 const controllerWrapper = (fn) => async (req, res) => {
   const payload = {
-    context: req.context,
     body: req.body,
     query: req.query,
     params: req.params,
