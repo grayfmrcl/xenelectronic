@@ -2,6 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const categories = require('./categories');
+const products = require('./products');
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -9,5 +10,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/categories', categories);
+router.use('/products', products);
 
 module.exports = router;
