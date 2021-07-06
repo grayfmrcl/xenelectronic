@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -18,6 +19,8 @@ import Input from '@material-ui/core/Input';
 import currency from 'currency.js';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { updateItemQuantity, removeItem } from '../modules/cart/actions';
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(3),
@@ -35,26 +38,35 @@ const useStyles = makeStyles((theme) => ({
   checkoutSection: {
     marginTop: 'inherit',
     display: 'flex',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   }
 }));
 
-const cartItems = [{
-  id: 1,
-  name: 'Product 1',
-  imageUrl: 'https://picsum.photos/300/200',
-  quantity: 2,
-  totalPrice: 200,
-}, {
-  id: 2,
-  name: 'Product 2',
-  imageUrl: 'https://picsum.photos/300/200',
-  quantity: 2,
-  totalPrice: 200,
-}]
 
-const CartContainer = () => {
+const mapStateToProps = state => {
+  return {
+    items: state.cart.items,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateItemQuantity: (id, quantity) => {
+      dispatch(updateItemQuantity({ id, quantity }));
+    },
+    removeItemFromCart: (id) => {
+      dispatch(removeItem(id));
+    }
+  };
+};
+
+const CartContainer = ({
+  items,
+  updateItemQuantity,
+  removeItemFromCart,
+}) => {
   const classes = useStyles();
+  const cartItems = items || [];
   return (
     <Container maxWidth="md">
       <Paper className={classes.paper}>
@@ -62,7 +74,7 @@ const CartContainer = () => {
           Shopping Cart
         </Typography>
         <TableContainer>
-          <Table border>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell></TableCell>
@@ -74,8 +86,8 @@ const CartContainer = () => {
             </TableHead>
             <TableBody>
               {cartItems.map(item => (
-                <TableRow>
-                  <TableCell padding={'normal'}>
+                <TableRow key={item.id}>
+                  <TableCell>
                     <img src={item.imageUrl} alt={item.name} width={150} height={75} />
                   </TableCell>
                   <TableCell>
@@ -84,11 +96,11 @@ const CartContainer = () => {
                     </Typography>
                   </TableCell>
                   <TableCell size="small">
-                    <IconButton>
+                    <IconButton onClick={() => { updateItemQuantity(item.id, -1) }}>
                       <MinusCircleIcon />
                     </IconButton>
                     <Input value={item.quantity} className={classes.quantityInput} />
-                    <IconButton>
+                    <IconButton onClick={() => { updateItemQuantity(item.id, 1) }}>
                       <AddCircleIcon />
                     </IconButton>
                   </TableCell>
@@ -96,7 +108,7 @@ const CartContainer = () => {
                     {currency(item.totalPrice).format()}
                   </TableCell>
                   <TableCell>
-                    <IconButton color="secondary">
+                    <IconButton color="secondary" onClick={() => { removeItemFromCart(item.id) }}>
                       <DeleteForeverRoundedIcon />
                     </IconButton>
                   </TableCell>
@@ -106,6 +118,14 @@ const CartContainer = () => {
           </Table>
         </TableContainer>
         <div className={classes.checkoutSection}>
+          <div>
+            <Typography variant="subtitle1" component="h2">
+              Total Amount:
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {currency(cartItems.map(item => item.totalPrice).reduce((a, b) => a + b, 0)).format()}
+            </Typography>
+          </div>
           <Button
             color="primary"
             variant="contained"
@@ -119,4 +139,7 @@ const CartContainer = () => {
   )
 }
 
-export default CartContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(CartContainer);

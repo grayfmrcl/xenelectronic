@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import { makeStyles } from '@material-ui/core/styles';
 import currency from 'currency.js';
+import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ContainerGrid = ({ productList }) => {
+const ContainerGrid = ({ productList, addToCart }) => {
   const classes = useStyles();
   const products = productList && productList.data.length > 0 ? productList.data : [];
   return (
@@ -41,14 +42,14 @@ const ContainerGrid = ({ productList }) => {
           />
           <CardContent className={classes.cardContent}>
             <Typography gutterBottom variant="h6" component="h2">
-              {product.name}
-            </Typography>
-            <Typography gutterBottom variant="subtitle1" component="h2">
-              {product.category ? product.category.name : null}
-            </Typography>
-            <Typography variant="subtitle2" component="h2">
-              {currency(product.price).format}
-            </Typography>
+                {product.name}
+              </Typography>
+              <Typography gutterBottom variant="subtitle1" component="h2">
+                {product.category ? product.category.name : null}
+              </Typography>
+              <Typography variant="subtitle2" component="h2">
+                {currency(product.price).format()}
+              </Typography>
           </CardContent>
           <CardActions>
             <Button
@@ -56,6 +57,7 @@ const ContainerGrid = ({ productList }) => {
               color="primary"
               variant="outlined"
               startIcon={<AddShoppingCartIcon />}
+              onClick={() => { addToCart(product) }}
             >
               Add
             </Button>
