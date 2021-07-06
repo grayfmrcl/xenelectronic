@@ -96,6 +96,59 @@ To view the coverage of this test run this
 
 This will displays the test coverage of the server codebase, excluding migration, seed, and config files.
 
+## Deployment
+
+This will give you instruction of how to deploy the server and client to live systems
+
+### Deploy server to Heroku
+
+Create Heroku account [here](https://signup.heroku.com/) and install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+
+Login to Heroku CLI
+
+    heroku login
+
+Initialize Heroku project
+
+    heroku create
+
+This will initialize Heroku project and spawn new git remote for heroku
+
+Because this repository contained multiple projects, heroku build will fail if the root branch pushed to heroku.
+Instead push the subtree /server to heroku remote
+
+    git subtree push --prefix server heroku master
+
+This will build the web api in heroku, but there are no still no database.
+
+Next, open your heroku console on the browser and navigate to the Resources tab.
+
+Add Heroku Postgres as add-ons and attached as database.
+
+<img width="1246" alt="Screen Shot 2021-07-07 at 07 05 02" src="https://user-images.githubusercontent.com/24917415/124677146-04d95e80-deea-11eb-9c9c-8231eaa823dd.png">
+
+Make sure Config Vars `DATABASE_URL` was generated in Settings section.
+Also add `PGSSLMODE` kwy with value `no-verify` in Config Vars.
+
+<img width="1232" alt="Screen Shot 2021-07-07 at 07 05 30" src="https://user-images.githubusercontent.com/24917415/124676880-8d0b3400-dee9-11eb-8766-28f0849a28ad.png">
+
+After this, you are ready to migrate and seed the database.
+
+Run the migration in heroku
+
+    heroku run npm rum db:migrate
+
+Run the migration in heroku
+
+    heroku run npm rum db:migrate
+    
+At last, run the app
+
+    heroku open
+
+If success, it should redirect to browser to open the root route.
+The url generated, will be used when deploying the client app.
+
 ## Built With
 
   - [Experss.js](https://expressjs.com/) - Server
