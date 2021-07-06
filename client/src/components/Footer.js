@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <React.Fragment>
       <Typography variant="h6" align="center" gutterBottom>
-          Footer
+          Xendit
         </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
           Full-stack Engineer Pre-assessment Project
