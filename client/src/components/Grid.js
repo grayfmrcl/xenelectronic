@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
 
 const ContainerGrid = ({ productList }) => {
   const classes = useStyles();
-
+  const products = productList && productList.data.length > 0 ? productList.data : [];
   return (
     <Grid container spacing={4}>
-    {productList.data.map((product) => (
+    {products.map((product) => (
       <Grid item key={product.id} xs={12} sm={6} md={4}>
         <Card className={classes.card}>
           <CardMedia
