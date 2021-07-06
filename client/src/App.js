@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +13,7 @@ import Heading from './components/Heading';
 import Footer from './components/Footer';
 import ProductContainer from './containers/ProductContainer';
 import CartContainer from './containers/CartContainer';
+import store from './modules/store';
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -23,26 +25,28 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
   return (
-    <Router>
-      <React.Fragment>
-        <CssBaseline />
-        <Topbar />
-        <main>
-          <Heading />
-          <Switch>
-            <Route path="/cart">
-              <CartContainer />
-            </Route>
-            <Route path="/">
-              <ProductContainer />
-            </Route>
-          </Switch>
-        </main>
-        <footer className={classes.footer}>
-          <Footer />
-        </footer>
-      </React.Fragment>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <React.Fragment>
+          <CssBaseline />
+          <Topbar />
+          <main>
+            <Heading />
+            <Switch>
+              <Route path="/cart">
+                <CartContainer />
+              </Route>
+              <Route path="/">
+                <ProductContainer />
+              </Route>
+            </Switch>
+          </main>
+          <footer className={classes.footer}>
+            <Footer />
+          </footer>
+        </React.Fragment>
+      </Router>
+    </Provider>
   );
 }
 

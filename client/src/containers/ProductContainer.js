@@ -1,8 +1,11 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '../components/Grid';
+import { fetchProducts } from '../modules/product/actions';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -11,14 +14,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductContainer = () => {
+const mapStateToProps = state => {
+  return {
+    products: state.products,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchProducts: () => {
+      dispatch(fetchProducts());
+    }
+  };
+};
+
+const ProductContainer = ({
+  products,
+  fetchProducts,
+}) => {
   const classes = useStyles();
+  
+  useEffect(() => { fetchProducts() }, [])
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
-      <Grid />
+      <Grid productList={products} />
     </Container>
   );
 }
 
-export default ProductContainer;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProductContainer);
