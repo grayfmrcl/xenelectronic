@@ -4,8 +4,8 @@ const productsInitState = {
   data: [],
 };
 
-export const products = (state = productsInitState, action) => {
-  switch(action.type) {
+const products = (state = productsInitState, action) => {
+  switch (action.type) {
     case 'FETCH_PRODUCT_REQUEST':
       return {
         ...state,
@@ -26,8 +26,10 @@ export const products = (state = productsInitState, action) => {
         loading: false,
         error: action.payload,
         data: [],
-      }
+      };
     default:
       return state;
   }
-}
+};
+
+export default products;

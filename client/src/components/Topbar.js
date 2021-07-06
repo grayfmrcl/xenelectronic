@@ -25,27 +25,27 @@ const Topbar = () => {
   return (
     <AppBar position="relative">
       <Toolbar className={classes.toolbar}>
-      <IconButton
+        <IconButton
           color="inherit"
           onClick={() => history.push('/')}
-          >
+        >
           <HomeIcon className={classes.icon} />
-            <Typography variant="h6" noWrap>
-              Home
-            </Typography>
+          <Typography variant="h6" noWrap>
+            Home
+          </Typography>
         </IconButton>
         <IconButton
           color="inherit"
           onClick={() => history.push('/cart')}
-          >
+        >
           <ShoppingCartIcon className={classes.icon} />
-            <Typography variant="h6" noWrap>
-              Cart
-            </Typography>
+          <Typography variant="h6" noWrap>
+            Cart
+          </Typography>
         </IconButton>
       </Toolbar>
     </AppBar>
   );
-}
+};
 
 export default Topbar;
