@@ -18,8 +18,13 @@ import CheckoutIcon from '@material-ui/icons/CheckOutlined';
 import Input from '@material-ui/core/Input';
 import currency from 'currency.js';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 
-import { updateItemQuantity, removeItem } from '../modules/cart/actions';
+import {
+  updateItemQuantity,
+  removeItem,
+  resetCart,
+} from '../modules/cart/actions';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -56,6 +61,9 @@ const mapDispatchToProps = dispatch => {
     },
     removeItemFromCart: (id) => {
       dispatch(removeItem(id));
+    },
+    resetCart: () => {
+      dispatch(resetCart());
     }
   };
 };
@@ -64,9 +72,11 @@ const CartContainer = ({
   items,
   updateItemQuantity,
   removeItemFromCart,
+  resetCart,
 }) => {
   const classes = useStyles();
   const cartItems = items || [];
+  const history = useHistory();
   return (
     <Container maxWidth="md">
       <Paper className={classes.paper}>
@@ -130,6 +140,10 @@ const CartContainer = ({
             color="primary"
             variant="contained"
             startIcon={<CheckoutIcon />}
+            onClick={() => {
+              resetCart();
+              history.push('/checkout');
+            }}
           >
             Checkout
           </Button>

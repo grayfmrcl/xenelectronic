@@ -21,3 +21,8 @@ export const removeItem = itemId => dispatch => {
     payload: itemId,
   })
 }
+
+export const resetCart = () => dispatch => {
+  console.log('RESET_CART');
+  dispatch({ type: 'RESET_CART' })
+}

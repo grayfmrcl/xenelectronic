@@ -13,6 +13,7 @@ import Heading from './components/Heading';
 import Footer from './components/Footer';
 import ProductContainer from './containers/ProductContainer';
 import CartContainer from './containers/CartContainer';
+import CheckoutContainer from './containers/CheckoutContainer';
 import store from './modules/store';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +34,9 @@ const App = () => {
           <main>
             <Heading />
             <Switch>
+              <Route path="/checkout">
+                <CheckoutContainer />
+              </Route>
               <Route path="/cart">
                 <CartContainer />
               </Route>

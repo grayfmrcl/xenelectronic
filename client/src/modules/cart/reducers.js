@@ -36,6 +36,9 @@ const reducer = (state = cartInitState, action) => {
       const newItems = [...state.items];
       return { items: newItems.filter(item => item.id !== action.payload) }
     }
+    case 'RESET_CART': {
+      return { items: [] }
+    }
     default:
       return state;
   }
