@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '../components/Grid';
 import { fetchProducts } from '../modules/product/actions';
+import { addToCart } from '../modules/cart/actions';
 
 const useStyles = makeStyles((theme) => ({
   cardGrid: {
@@ -24,6 +25,16 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchProducts: () => {
       dispatch(fetchProducts());
+    },
+    addToCart: (product) => {
+      const item = {
+        id: product.id,
+        name: product.name,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        quantity: 1
+      }
+      dispatch(addToCart(item));
     }
   };
 };
@@ -31,6 +42,7 @@ const mapDispatchToProps = dispatch => {
 const ProductContainer = ({
   products,
   fetchProducts,
+  addToCart,
 }) => {
   const classes = useStyles();
   
@@ -38,7 +50,7 @@ const ProductContainer = ({
 
   return (
     <Container className={classes.cardGrid} maxWidth="md">
-      <Grid productList={products} />
+      <Grid productList={products} addToCart={addToCart} />
     </Container>
   );
 }
