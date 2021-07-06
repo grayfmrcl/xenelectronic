@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/xenelectronic/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/xenelectronic/static/js/main.94b6c30f.chunk.js",
+    "main.js.map": "/xenelectronic/static/js/main.94b6c30f.chunk.js.map",
+    "runtime-main.js": "/xenelectronic/static/js/runtime-main.c154a35b.js",
+    "runtime-main.js.map": "/xenelectronic/static/js/runtime-main.c154a35b.js.map",
+    "static/js/2.1c81f502.chunk.js": "/xenelectronic/static/js/2.1c81f502.chunk.js",
+    "static/js/2.1c81f502.chunk.js.map": "/xenelectronic/static/js/2.1c81f502.chunk.js.map",
+    "static/js/3.c7714fab.chunk.js": "/xenelectronic/static/js/3.c7714fab.chunk.js",
+    "static/js/3.c7714fab.chunk.js.map": "/xenelectronic/static/js/3.c7714fab.chunk.js.map",
+    "index.html": "/xenelectronic/index.html",
+    "static/css/main.6dea0f05.chunk.css.map": "/xenelectronic/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.1c81f502.chunk.js.LICENSE.txt": "/xenelectronic/static/js/2.1c81f502.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c154a35b.js",
+    "static/js/2.1c81f502.chunk.js",
+    "static/css/main.6dea0f05.chunk.css",
+    "static/js/main.94b6c30f.chunk.js"
+  ]
+}
