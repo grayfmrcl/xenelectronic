@@ -57,30 +57,28 @@ Make sure the port specified in the url is matched with the port specified in th
 
 Make sure postgres are already running and sequelize-cli already installed.
 
+Navigate to /server
+
 Creating database
 
-    cd server
     npm run db:init
 
 This will create the database needed for this app.
 
 Migrating database
 
-    cd server
     npm run db:migrate
 
 This will create the tables in the previously created database.
 
 Seeding database
 
-    cd server
     npm run db:seed
 
 This will insert initial data inside the tables created before.
 
 ### Run the web API (server)
 
-    cd server
     npm run dev
 
 ## Running the tests
@@ -90,12 +88,10 @@ The tests includes unit and integration tests which will need the database conne
 
 Run the test
 
-    cd server
     npm run test
 
 To view the coverage of this test run this
 
-    cd server
     npm run coverage
 
 This will displays the test coverage of the server codebase, excluding migration, seed, and config files.
@@ -109,4 +105,19 @@ This will displays the test coverage of the server codebase, excluding migration
   - [Mocha](https://sinonjs.org/) - Mock library
   - [React.js](https://reactjs.org/) - Client (SPA)
   - [Material-UI](https://material-ui.com/) - React components
+
+## App Screenshots
+
+Test coverage
+![Screen Shot 2021-07-07 at 05 09 59](https://user-images.githubusercontent.com/24917415/124667866-38ac8800-deda-11eb-8f72-02f4a33a5996.png)
+
+Product List
+<img width="1440" alt="Screen Shot 2021-07-07 at 05 11 45" src="https://user-images.githubusercontent.com/24917415/124667944-5843b080-deda-11eb-854e-d4210c5a46df.png">
+
+Shopping Cart
+<img width="1440" alt="Screen Shot 2021-07-07 at 05 12 33" src="https://user-images.githubusercontent.com/24917415/124668002-6c87ad80-deda-11eb-9945-747586eaa5ee.png">
+
+Checkout
+<img width="1440" alt="Screen Shot 2021-07-07 at 05 12 52" src="https://user-images.githubusercontent.com/24917415/124668044-80cbaa80-deda-11eb-932d-0d00f2cb0d34.png">
+
   
