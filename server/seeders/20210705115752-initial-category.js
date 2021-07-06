@@ -1,7 +1,7 @@
 const tableName = 'category';
 
 const categories = [{
-  id: '2a0a2b5f-2577-482c-b7a1-420f3f6ab7e4',
+  id: '400fa6cb-25fd-435c-acfb-70fc816277c7',
   name: 'Smartphone',
   created_at: new Date(),
   updated_at: new Date(),
@@ -28,6 +28,11 @@ const categories = [{
 }, {
   id: '57830003-e335-4c25-b063-ba25c358fbce',
   name: 'Audio',
+  created_at: new Date(),
+  updated_at: new Date(),
+}, {
+  id: '2a0a2b5f-2577-482c-b7a1-420f3f6ab7e4',
+  name: 'Game Console',
   created_at: new Date(),
   updated_at: new Date(),
 }];
