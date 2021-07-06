@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import TableContainer from '@material-ui/core/TableContainer';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody'
+import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
 import IconButton from '@material-ui/core/IconButton';
@@ -18,7 +18,7 @@ import CheckoutIcon from '@material-ui/icons/CheckOutlined';
 import Input from '@material-ui/core/Input';
 import currency from 'currency.js';
 import { makeStyles } from '@material-ui/core/styles';
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
 
 import {
   updateItemQuantity,
@@ -44,35 +44,30 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 'inherit',
     display: 'flex',
     justifyContent: 'space-between',
-  }
+  },
 }));
 
+const mapStateToProps = (state) => ({
+  items: state.cart.items,
+});
 
-const mapStateToProps = state => {
-  return {
-    items: state.cart.items,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateItemQuantity: (id, quantity) => {
-      dispatch(updateItemQuantity({ id, quantity }));
-    },
-    removeItemFromCart: (id) => {
-      dispatch(removeItem(id));
-    },
-    resetCart: () => {
-      dispatch(resetCart());
-    }
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateCartItemQty: (id, quantity) => {
+    dispatch(updateItemQuantity({ id, quantity }));
+  },
+  removeItemFromCart: (id) => {
+    dispatch(removeItem(id));
+  },
+  emptyCart: () => {
+    dispatch(resetCart());
+  },
+});
 
 const CartContainer = ({
   items,
-  updateItemQuantity,
+  updateCartItemQty,
   removeItemFromCart,
-  resetCart,
+  emptyCart,
 }) => {
   const classes = useStyles();
   const cartItems = items || [];
@@ -87,15 +82,15 @@ const CartContainer = ({
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
+                <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
-              {cartItems.map(item => (
+              {cartItems.map((item) => (
                 <TableRow key={item.id}>
                   <TableCell>
                     <img src={item.imageUrl} alt={item.name} width={150} height={75} />
@@ -106,11 +101,11 @@ const CartContainer = ({
                     </Typography>
                   </TableCell>
                   <TableCell size="small">
-                    <IconButton onClick={() => { updateItemQuantity(item.id, -1) }}>
+                    <IconButton onClick={() => { updateCartItemQty(item.id, -1); }}>
                       <MinusCircleIcon />
                     </IconButton>
                     <Input value={item.quantity} className={classes.quantityInput} />
-                    <IconButton onClick={() => { updateItemQuantity(item.id, 1) }}>
+                    <IconButton onClick={() => { updateCartItemQty(item.id, 1); }}>
                       <AddCircleIcon />
                     </IconButton>
                   </TableCell>
@@ -118,7 +113,7 @@ const CartContainer = ({
                     {currency(item.totalPrice).format()}
                   </TableCell>
                   <TableCell>
-                    <IconButton color="secondary" onClick={() => { removeItemFromCart(item.id) }}>
+                    <IconButton color="secondary" onClick={() => { removeItemFromCart(item.id); }}>
                       <DeleteForeverRoundedIcon />
                     </IconButton>
                   </TableCell>
@@ -133,7 +128,9 @@ const CartContainer = ({
               Total Amount:
             </Typography>
             <Typography variant="h5" component="h2">
-              {currency(cartItems.map(item => item.totalPrice).reduce((a, b) => a + b, 0)).format()}
+              {currency(cartItems
+                .map((item) => item.totalPrice)
+                .reduce((a, b) => a + b, 0)).format()}
             </Typography>
           </div>
           <Button
@@ -141,7 +138,7 @@ const CartContainer = ({
             variant="contained"
             startIcon={<CheckoutIcon />}
             onClick={() => {
-              resetCart();
+              emptyCart();
               history.push('/checkout');
             }}
           >
@@ -150,8 +147,8 @@ const CartContainer = ({
         </div>
       </Paper>
     </Container>
-  )
-}
+  );
+};
 
 export default connect(
   mapStateToProps,

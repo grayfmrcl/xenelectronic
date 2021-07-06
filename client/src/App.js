@@ -28,7 +28,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <React.Fragment>
+        <>
           <CssBaseline />
           <Topbar />
           <main>
@@ -48,10 +48,10 @@ const App = () => {
           <footer className={classes.footer}>
             <Footer />
           </footer>
-        </React.Fragment>
+        </>
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;

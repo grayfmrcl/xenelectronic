@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 'inherit',
     display: 'flex',
     justifyContent: 'space-between',
-  }
+  },
 }));
 
 const CheckoutContainer = () => {
@@ -42,7 +42,7 @@ const CheckoutContainer = () => {
         </Typography>
       </Paper>
     </Container>
-  )
-}
+  );
+};
 
-export default CheckoutContainer
+export default CheckoutContainer;

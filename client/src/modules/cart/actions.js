@@ -1,28 +1,24 @@
-export const addToCart = item => dispatch => {
-  console.log('ADD_TO_CART', item);
+export const addToCart = (item) => (dispatch) => {
   dispatch({
     type: 'ADD_TO_CART',
     payload: item,
   });
-}
+};
 
-export const updateItemQuantity = item => dispatch => {
-  console.log('UPDATE_ITEM_QTY', item);
+export const updateItemQuantity = (item) => (dispatch) => {
   dispatch({
     type: 'UPDATE_ITEM_QTY',
     payload: item,
-  })
-}
+  });
+};
 
-export const removeItem = itemId => dispatch => {
-  console.log('REMOVE_ITEM', itemId);
+export const removeItem = (itemId) => (dispatch) => {
   dispatch({
     type: 'REMOVE_ITEM',
     payload: itemId,
-  })
-}
+  });
+};
 
-export const resetCart = () => dispatch => {
-  console.log('RESET_CART');
-  dispatch({ type: 'RESET_CART' })
-}
+export const resetCart = () => (dispatch) => {
+  dispatch({ type: 'RESET_CART' });
+};
